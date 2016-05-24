@@ -106,6 +106,8 @@ class Video extends Audio
             $commands[] = '4';
             $commands[] = '-trellis';
             $commands[] = '1';
+            $commands[] = '-strict';
+            $commands[] = '-2';
         }
 
         if ($format instanceof AudioInterface) {
@@ -121,7 +123,7 @@ class Video extends Audio
 
         $fs = FsManager::create();
         $fsId = uniqid('ffmpeg-passes');
-        $passPrefix = $fs->createTemporaryDirectory(0777, 50, $fsId) . '/' . uniqid('pass-');
+        $passPrefix = '/tmp/'.uniqid('pass-');
         $passes = array();
         $totalPasses = $format->getPasses();
 
