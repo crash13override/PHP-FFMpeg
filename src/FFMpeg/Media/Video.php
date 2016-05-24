@@ -145,6 +145,7 @@ class Video extends Audio
 
             $passes[] = $pass;
         }
+        
 
         $failure = null;
 
