@@ -26,12 +26,16 @@ abstract class AbstractMediaType implements MediaTypeInterface
     /** @var FiltersCollection */
     protected $filters;
 
+
+    public $isEncodingFast;
+
     public function __construct($pathfile, FFMpegDriver $driver, FFProbe $ffprobe)
     {
         $this->pathfile = $pathfile;
         $this->driver = $driver;
         $this->ffprobe = $ffprobe;
         $this->filters = new FiltersCollection();
+        $this->isEncodingFast = false;
     }
 
     /**

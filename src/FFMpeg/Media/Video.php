@@ -110,6 +110,15 @@ class Video extends Audio
             $commands[] = '-2';
         }
 
+        if($this->isEncodingFast){
+            $commands[] = '-preset';
+            $commands[] = 'ultrafast';
+            $commands[] = '-qp';
+            $commands[] = '0';
+            $commands[] = '-c:a';
+            $commands[] = 'copy';
+        }
+
         if ($format instanceof AudioInterface) {
             if (null !== $format->getAudioKiloBitrate()) {
                 $commands[] = '-b:a';
