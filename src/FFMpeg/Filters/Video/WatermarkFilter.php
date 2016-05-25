@@ -24,7 +24,9 @@ class WatermarkFilter implements VideoFilterInterface
     /** @var integer */
     private $priority;
 
-    public function __construct($watermarkPath, array $coordinates = array(), $priority = 0)
+    private $fadeOut;
+
+    public function __construct($watermarkPath, array $coordinates = array(), $priority = 0, $fadeOut = false)
     {
         if (!file_exists($watermarkPath)) {
             throw new InvalidArgumentException(sprintf('File %s does not exist', $watermarkPath));
@@ -33,6 +35,7 @@ class WatermarkFilter implements VideoFilterInterface
         $this->watermarkPath = $watermarkPath;
         $this->coordinates = $coordinates;
         $this->priority = $priority;
+        $this->fadeOut = $fadeOut;
     }
 
     /**
@@ -75,6 +78,8 @@ class WatermarkFilter implements VideoFilterInterface
                 break;
         }
 
-        return array('-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s [out]', $this->watermarkPath, $x, $y));
+        $fadeOption = ($this->fadeOut) ? ":enable='between(t,1,10)'" : '';
+
+        return array('-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s%s [out]', $this->watermarkPath, $x, $y, $fadeOption));
     }
 }
