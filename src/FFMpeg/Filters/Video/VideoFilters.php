@@ -126,9 +126,9 @@ class VideoFilters extends AudioFilters
      *
      * @return $this
      */
-    public function watermark($imagePath, array $coordinates = array())
+    public function watermark($imagePath, array $coordinates = array(), $priority = 0, $fadeIn = false)
     {
-        $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates));
+        $this->media->addFilter(new WatermarkFilter($imagePath, $coordinates, $priority, $fadeIn));
 
         return $this;
     }
