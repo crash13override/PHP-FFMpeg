@@ -78,8 +78,8 @@ class WatermarkFilter implements VideoFilterInterface
                 break;
         }
 
-        $fadeOption = ($this->fadeOut) ? ":enable='between(t,1,10)'" : '';
+        $fadeOption = ($this->fadeOut) ? "enable='between(t,1,10)'" : $x.':'.$y;
 
-        return array('-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s:%s%s [out]', $this->watermarkPath, $x, $y, $fadeOption));
+        return array('-vf', sprintf('movie=%s [watermark]; [in][watermark] overlay=%s [out]', $this->watermarkPath, $fadeOption));
     }
 }
