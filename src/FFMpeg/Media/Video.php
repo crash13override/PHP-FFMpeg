@@ -108,6 +108,8 @@ class Video extends Audio
             $commands[] = '1';
             $commands[] = '-strict';
             $commands[] = '-2';
+            $commands[] = '-threads';
+            $commands[] = '0';
         }
 
         if($this->isEncodingFast){
